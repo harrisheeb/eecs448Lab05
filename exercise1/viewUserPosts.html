@@ -1,0 +1,56 @@
+
+<html>
+    <head>
+	<title> Lab 5 </title>
+
+	<link href="style.css" rel="stylesheet" type="text/css" />
+    </head>
+<body>
+
+	<div class="center">
+	<h1> View User Posts </h1>
+
+    <form  action="viewUserPosts.php" method="post">
+
+	Username:
+	<br>
+  <select  type="text" name="User" id="user">
+
+    <?php
+    $conn = new mysqli("mysql.eecs.ku.edu", "hheeb", "aiH7vo7e", "hheeb");
+
+
+      /* check connection */
+        if ($conn->connect_error) {
+          die("Connection failed: " . $conn->connect_error);
+        }
+        $query = "SELECT user_id FROM Users";
+        if ($result = $conn->query($query)) {
+          echo "whats good fasm";
+        /* fetch associative array */
+          while ($row = $result->fetch_assoc()) {
+              echo "<option>";
+              echo $row["user_id"];
+              echo "</option>";
+          }
+
+          /* free result set */
+          $result->free();
+        }
+
+
+      $conn->close();
+    ?>
+
+  </select>
+  <br>
+
+        <br> <br>
+  </div>
+
+
+        <input class="center" type="submit" value="Submit"><br><br><br><br>
+	</div>
+    </form>
+</body>
+</html>
